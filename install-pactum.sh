@@ -72,3 +72,18 @@ then
   cp -R "${INSTALLER_DIR}/pactum-server" "./pactum-server"
   echo "\033[1;32mDone\033[0m"
 fi
+
+echo "\033[1;34mSetting up environment variables...\033[0m"
+ENV_FILE="./.env"
+# Create environment variables
+if [ ! -f "${ENV_FILE}" ]
+then
+  echo "\033[1;33mWARN: Creating a .env file in current directory\033[0m"
+  touch "${ENV_FILE}" # Create env file one
+fi
+
+echo "Appending environment variables..."
+echo "PACTUM_URL=http://localhost" >> "${ENV_FILE}"
+echo "PACTUM_PORT=3000" >> "${ENV_FILE}"
+
+echo "\033[1;32mDone\033[0m"

@@ -21,4 +21,3 @@ you environment.
 ## Benefits
 - Removes the decision making
 - Installs a pactum-server which can be used as a server for local development
-- 
