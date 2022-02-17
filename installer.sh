@@ -87,3 +87,48 @@ echo "PACTUM_URL=http://localhost" >> "${ENV_FILE}"
 echo "PACTUM_PORT=3000" >> "${ENV_FILE}"
 
 echo "\033[1;32mDone\033[0m"
+
+if [ ! -f "jest.config.js" ]
+then
+  echo ""
+  echo "Next steps:"
+  echo "- add the pactum-server in your docker-compose.yml file (if applicable)"
+  exit 0 # No need to copy jest configuration because not using jest
+fi
+
+echo "\033[1;34mSetting up jest files...\033[0m"
+
+if [ ! -d "./.jest" ]
+then
+  echo "\033[1;33mWARN: Creating a .jest directory in current directory\033[0m"
+  mkdir './.jest'
+fi
+
+JEST_FILES_DIR="${INSTALLER_DIR}/jest-files"
+JEST_CONF_DIR="./.jest"
+JEST_FILES=( $(ls "${JEST_FILES_DIR}") )
+
+echo "Copying over jest files..."
+for f in "${JEST_FILES[@]}"
+do
+  if [ "$f" == "setEnvVars.js" ] && [ -f "${JEST_CONF_DIR}/setEnvVars.js" ]
+  then
+    cat "${JEST_FILES_DIR}/${f}" >> "${JEST_CONF_DIR}/setEnvVars.js" # append contents
+  else
+    cp "${JEST_FILES_DIR}/${f}" "${JEST_CONF_DIR}/${f}"
+  fi
+  echo "Copied over ${f} to .jest directory"
+done
+
+echo "\033[1;32mDone\033[0m"
+
+echo "\033[1;36m=================================\033[0m"
+echo "\033[1;36m       We're not done yet        \033[0m"
+echo "\033[1;36m=================================\033[0m"
+
+echo ""
+echo "Next steps:"
+echo "- modify jest.config.js file to contain \"setupFiles: ['<rootDir>/.jest/setEnvVars.js']\" value"
+echo "- modify jest.config.js file to contain \"globalSetup: '<rootDir>/.jest/global-setup.ts'\" value"
+echo "- modify jest.config.js file to contain \"globalTeardown: '<rootDir>/.jest/global-teardown.ts'\" value"
+echo "- add the pactum-server in your docker-compose.yml file (if applicable)"
