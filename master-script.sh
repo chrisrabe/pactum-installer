@@ -16,7 +16,7 @@ PACTUM_INSTALLER_REPO="https://github.com/chrisrabe/pactum-installer.git"
 PACTUM_INSTALLER_DIR="./pactum-installer"
 INSTALL_SCRIPT="install-pactum.sh"
 
-git clone "${PACTUM_INSTALLER_REPO}"
+git clone "${PACTUM_INSTALLER_REPO}" > /dev/null
 mv "${PACTUM_INSTALLER_DIR}/${INSTALL_SCRIPT}" .
 
 chmod +x "./${INSTALL_SCRIPT}"
