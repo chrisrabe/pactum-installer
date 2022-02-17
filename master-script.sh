@@ -10,6 +10,8 @@ INSTALL_SCRIPT="install-pactum.sh"
 git clone "${PACTUM_INSTALLER_REPO}"
 mv "${PACTUM_INSTALLER_DIR}/${INSTALL_SCRIPT}" .
 
+chmod +x "./${INSTALL_SCRIPT}"
+
 # Run the installer
 ./${INSTALL_SCRIPT}
 
