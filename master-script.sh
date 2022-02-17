@@ -8,7 +8,7 @@ SERVICES="$1"
 if [ -z "${SERVICES}" ]
 then
   echo "\033[1;31mServices must be provided (comma separated, no spaces)\033[0m"
-  echo "\033[1;31mUsage: ./add-pactum.sh \"service1,service2,service3\"\033[0m"
+  echo "\033[1;31mUsage: ./install-pactum.sh \"service1,service2,service3\"\033[0m"
   exit 1
 fi
 
