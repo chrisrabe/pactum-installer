@@ -1,0 +1,51 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+import axios from 'axios';
+import { RequestMethod } from 'pactum/src/exports/mock';
+
+export const PACTUM_PORT = process.env.PACTUM_PORT ? parseInt(process.env.PACTUM_PORT) : 3000;
+export const PACTUM_URL = `${process.env.PACTUM_URL}:${PACTUM_PORT}`;
+const INTERACTIONS_API = `${PACTUM_URL}/api/pactum/interactions`;
+
+%SERVICE_NAMESPACE%
+
+export interface StubOptions {
+  method?: RequestMethod;
+  responseStatus?: number;
+}
+
+const defaultStubOptions: StubOptions = {
+  method: 'GET',
+  responseStatus: 200,
+};
+
+export const addStub = async (
+  namespace: ServiceNamespace,
+  url: string,
+  responseBody: Record<string, any>,
+  options = defaultStubOptions
+) => {
+  const stubPath = url.startsWith('/') ? url : `/${url}`;
+  const defaultHeaders = {
+    'Content-Type': 'application/json',
+  };
+  const interaction = [
+    {
+      request: {
+        method: options.method,
+        path: `/${namespace}${stubPath}`,
+      },
+      response: {
+        status: options.responseStatus,
+        headers: defaultHeaders,
+        body: responseBody,
+      },
+    },
+  ];
+  await axios.post(INTERACTIONS_API, interaction, { headers: defaultHeaders });
+};
+
+export const emptyStubs = async () => {
+  await axios.delete(INTERACTIONS_API);
+};

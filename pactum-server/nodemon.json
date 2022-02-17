@@ -1,0 +1,6 @@
+{
+  "watch": ["stubs"],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "ts-node start-server.ts"
+}
