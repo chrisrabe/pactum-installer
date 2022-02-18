@@ -54,7 +54,7 @@ rm -rf "${PACTUM_INSTALLER_DIR}"
 
 ## Why build this?
 This installer was created to streamline the pactum set up and installation process for
-you environment.
+your environment.
 
 ## Benefits
 - Removes the decision making for setting up pactum
