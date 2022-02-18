@@ -1,4 +1,4 @@
-if (process.argv.length < 0) {
+if (process.argv.length < 3) {
     throw new Error("Must pass in comma delimited services");
 }
 
