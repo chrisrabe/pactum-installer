@@ -50,7 +50,12 @@ rm -rf "./${INSTALL_SCRIPT}"
 rm -rf "${PACTUM_INSTALLER_DIR}"
 ```
 
-2. Make the file executable
+2. Make the file executable using `chmod +x ./install-pactum.sh`
+3. Run the script `./install-pactum.sh "service1,service2,serviceN"`
+
+NOTE: The arguments passed in the pactum installation script represents third party services
+that your application interacts with. If you're not interacting with other services, feel free
+to just run `./install-pactum.sh "default"`. This can be modified later within the code.
 
 ## Why build this?
 This installer was created to streamline the pactum set up and installation process for
